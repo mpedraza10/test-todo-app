@@ -1,5 +1,4 @@
 import { Suspense } from 'react';
-import { cookies } from 'next/headers';
 import { createClient } from '@/lib/supabase';
 import { getUserCategories } from '@/lib/db/queries';
 import TodoListContainer from '@/components/TodoList/TodoListContainer';
@@ -16,7 +15,7 @@ interface DashboardPageProps {
 }
 
 export default async function DashboardPage({ searchParams }: DashboardPageProps) {
-  const supabase = await createClient(await cookies());
+  const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
   if (!user) {
